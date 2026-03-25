@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Leena Sai Sree Maridi — Cybersecurity Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#0a0c10; --surface:#10141c; --card:#141820;
+  --border:rgba(100,200,180,0.12); --accent:#4ecba0;
+  --accent2:#64d4f4; --accent3:#f4c664;
+  --text:#e8edf5; --muted:#7a8499; --glow:rgba(78,203,160,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(78,203,160,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(78,203,160,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(10,12,16,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'DM Mono',monospace;font-size:0.85rem;color:var(--accent);letter-spacing:0.08em;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;flex-wrap:wrap;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 5rem;position:relative;overflow:hidden;}
+.hero-bg-circle{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.circle-1{width:600px;height:600px;background:radial-gradient(circle,rgba(78,203,160,0.12) 0%,transparent 70%);top:-100px;right:-100px;animation:pulse 8s ease-in-out infinite;}
+.circle-2{width:400px;height:400px;background:radial-gradient(circle,rgba(100,212,244,0.08) 0%,transparent 70%);bottom:100px;left:10%;animation:pulse 10s ease-in-out infinite 2s;}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.1);opacity:0.7;}}
+
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease forwards 0.2s;}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5.5vw,5rem);line-height:1.1;letter-spacing:-0.02em;margin-bottom:0.5rem;opacity:0;animation:fadeUp 0.8s ease forwards 0.4s;}
+.hero-name em{color:var(--accent);font-style:italic;}
+.hero-lastname{font-family:'DM Mono',monospace;font-size:clamp(0.8rem,1.4vw,1rem);letter-spacing:0.28em;color:var(--muted);text-transform:uppercase;margin-bottom:1.2rem;opacity:0;animation:fadeUp 0.8s ease forwards 0.55s;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.55rem);font-weight:400;color:var(--muted);margin-bottom:2rem;opacity:0;animation:fadeUp 0.8s ease forwards 0.6s;}
+.hero-bio{max-width:640px;font-size:0.97rem;color:#a0aab8;line-height:1.85;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.8s ease forwards 0.8s;}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem;opacity:0;animation:fadeUp 0.8s ease forwards 1s;}
+.hero-stats{display:flex;gap:3rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease forwards 1.2s;}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.9rem;color:var(--accent);line-height:1;}
+.stat-label{font-family:'DM Mono',monospace;font-size:0.61rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.8rem;border-radius:2px;font-family:'DM Mono',monospace;font-size:0.77rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all 0.2s;border:none;}
+.btn-primary{background:var(--accent);color:#0a0c10;border:1px solid var(--accent);}
+.btn-primary:hover{background:transparent;color:var(--accent);}
+.btn-outline{background:transparent;color:var(--accent);border:1px solid var(--border);}
+.btn-outline:hover{border-color:var(--accent);}
+
+/* SECTIONS */
+section{padding:7rem 4rem;position:relative;z-index:1;}
+.section-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:3.5rem;}
+.section-num{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--accent);letter-spacing:0.1em;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,2.8vw,2.4rem);font-weight:400;}
+.section-line{flex:1;height:1px;background:var(--border);max-width:200px;}
+.section-hint{font-family:'DM Mono',monospace;font-size:0.67rem;color:var(--muted);letter-spacing:0.12em;margin-bottom:2rem;}
+
+/* EXPERIENCE CARDS */
+.exp-grid{display:flex;flex-direction:column;gap:3px;}
+.exp-card{background:var(--card);border:1px solid var(--border);position:relative;overflow:hidden;transition:border-color 0.3s;}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:transform 0.35s;transform-origin:bottom;}
+.exp-card:hover{border-color:rgba(78,203,160,0.3);}
+.exp-card:hover::before,.exp-card.open::before{transform:scaleY(1);}
+.exp-card.open{border-color:rgba(78,203,160,0.25);}
+
+.exp-top{padding:2rem 2.5rem;cursor:pointer;user-select:none;}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:0.6rem;}
+.exp-company{font-family:'DM Mono',monospace;font-size:0.67rem;letter-spacing:0.13em;color:var(--accent);text-transform:uppercase;margin-bottom:0.3rem;}
+.exp-role{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;}
+.exp-right{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;justify-content:flex-end;}
+.exp-date{font-family:'DM Mono',monospace;font-size:0.67rem;color:var(--muted);padding:0.3rem 0.8rem;border:1px solid var(--border);white-space:nowrap;}
+.exp-toggle{font-family:'DM Mono',monospace;font-size:1.1rem;color:var(--accent);width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);transition:all 0.35s;flex-shrink:0;line-height:1;}
+.exp-card.open .exp-toggle{transform:rotate(45deg);border-color:var(--accent);}
+.exp-award{display:inline-flex;align-items:center;gap:0.4rem;font-family:'DM Mono',monospace;font-size:0.63rem;color:var(--accent3);letter-spacing:0.08em;margin-top:0.5rem;margin-bottom:0.5rem;padding:0.25rem 0.7rem;border:1px solid rgba(244,198,100,0.3);}
+.exp-summary{font-size:0.9rem;color:var(--muted);margin-top:0.6rem;line-height:1.7;}
+
+.exp-detail{max-height:0;overflow:hidden;transition:max-height 0.55s cubic-bezier(0.4,0,0.2,1);}
+.exp-card.open .exp-detail{max-height:900px;}
+.exp-detail-inner{padding:0 2.5rem 2rem;border-top:1px solid var(--border);}
+.exp-detail-inner ul{list-style:none;display:flex;flex-direction:column;gap:0.65rem;padding-top:1.25rem;}
+.exp-detail-inner li{font-size:0.88rem;color:#a0aab8;padding-left:1.3rem;position:relative;line-height:1.7;}
+.exp-detail-inner li::before{content:'›';position:absolute;left:0;color:var(--accent);font-size:1rem;}
+
+/* SKILLS */
+#skills{background:var(--surface);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+.skill-group{padding:2rem;border:1px solid var(--border);background:var(--card);transition:border-color 0.3s;}
+.skill-group:hover{border-color:rgba(78,203,160,0.3);}
+.skill-group-icon{font-size:1.4rem;margin-bottom:0.6rem;}
+.skill-group-name{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.skill-tag{font-family:'DM Mono',monospace;font-size:0.67rem;padding:0.3rem 0.7rem;border:1px solid var(--border);color:var(--muted);transition:all 0.2s;}
+.skill-tag:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.project-card{border:1px solid var(--border);background:var(--card);padding:2rem;transition:all 0.3s;}
+.project-card:hover{border-color:rgba(78,203,160,0.3);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3);}
+.project-num{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.8rem;}
+.project-title{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:0.6rem;}
+.project-desc{font-size:0.87rem;color:var(--muted);line-height:1.7;}
+
+/* RESEARCH */
+#research{background:var(--surface);}
+.research-card{border:1px solid var(--border);background:var(--card);padding:3rem;max-width:900px;position:relative;overflow:hidden;}
+.research-card::after{content:'"';position:absolute;right:2rem;bottom:-1rem;font-family:'Playfair Display',serif;font-size:10rem;color:rgba(78,203,160,0.04);line-height:1;pointer-events:none;}
+.research-org{font-family:'DM Mono',monospace;font-size:0.67rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;}
+.research-title{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1rem;}
+.research-body{color:var(--muted);font-size:0.92rem;line-height:1.85;}
+.research-highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);}
+.highlight-val{font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent);}
+.highlight-desc{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;}
+
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;}
+.cert-card{border:1px solid var(--border);background:var(--card);padding:1.4rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:all 0.2s;}
+.cert-card:hover{border-color:rgba(78,203,160,0.3);background:rgba(78,203,160,0.03);}
+.cert-icon{width:38px;height:38px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.cert-name{font-size:0.87rem;color:var(--text);line-height:1.4;}
+.cert-year{font-family:'DM Mono',monospace;font-size:0.64rem;color:var(--muted);margin-top:0.2rem;}
+
+/* AWARDS */
+#awards{background:var(--surface);}
+.awards-row{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.award-card{flex:1;min-width:240px;border:1px solid rgba(244,198,100,0.2);background:rgba(244,198,100,0.02);padding:2rem;transition:border-color 0.2s;}
+.award-card:hover{border-color:rgba(244,198,100,0.4);}
+.award-icon{font-size:1.4rem;margin-bottom:0.7rem;}
+.award-title{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:0.4rem;color:var(--accent3);}
+.award-org{font-family:'DM Mono',monospace;font-size:0.66rem;color:var(--muted);letter-spacing:0.07em;}
+
+/* VOLUNTEERING */
+.vol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;}
+.vol-item{border:1px solid var(--border);background:var(--card);padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:1rem;transition:border-color 0.2s;}
+.vol-item:hover{border-color:rgba(78,203,160,0.3);}
+.vol-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:0.55rem;flex-shrink:0;}
+.vol-text{font-size:0.88rem;color:var(--text);line-height:1.55;}
+.vol-text strong{color:var(--accent);font-weight:500;}
+
+/* CONTACT */
+#contact{text-align:center;}
+.contact-inner{max-width:600px;margin:0 auto;}
+.contact-heading{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);margin-bottom:1rem;line-height:1.1;}
+.contact-heading em{color:var(--accent);font-style:italic;}
+.contact-sub{color:var(--muted);margin-bottom:2.5rem;font-size:0.95rem;}
+.contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:0.64rem;color:var(--muted);letter-spacing:0.08em;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{gap:0.8rem;}
+  .nav-links a{font-size:0.65rem;}
+  section{padding:5rem 1.5rem;}
+  #hero{padding:7rem 1.5rem 3rem;}
+  .hero-stats{gap:2rem;}
+  .exp-top{padding:1.5rem;}
+  .exp-detail-inner{padding:0 1.5rem 1.5rem;}
+  footer{flex-direction:column;gap:0.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">// L.S.S.M</span>
+  <ul class="nav-links">
+    <li><a href="#experience">Work</a></li>
+    <li><a href="#leadership-exp">Leadership</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle circle-1"></div>
+  <div class="hero-bg-circle circle-2"></div>
+
+  <p class="hero-eyebrow">// Cybersecurity Portfolio</p>
+  <h1 class="hero-name">Leena Sai Sree <em>Maridi</em></h1>
+  <p class="hero-lastname">M.S. Cybersecurity &nbsp;·&nbsp; Saint Louis University</p>
+  <p class="hero-title">Cybersecurity Professional &amp; AI Trainer</p>
+  <p class="hero-bio">
+    Security+ certified graduate student with 2+ years of professional experience in access management and cybersecurity operations at Accenture. Currently training frontier AI models on cybersecurity domain knowledge at Handshake AI. GPA 3.90. WiCyS SLU Chapter President. NCL Top 500 nationally. Featured on Fox 2 News.
+  </p>
+  <div class="hero-cta">
+    <a href="mailto:sluleenam@gmail.com" class="btn btn-primary">Get in Touch</a>
+    <a href="https://www.linkedin.com/in/leena-sai-sree/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    <a href="#experience" class="btn btn-outline">View My Work ↓</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">3.90</div>
+      <div class="stat-label">GPA / 4.0</div>
+    </div>
+    <div>
+      <div class="stat-num">2+</div>
+      <div class="stat-label">Yrs Experience</div>
+    </div>
+    <div>
+      <div class="stat-num">650+</div>
+      <div class="stat-label">Users Managed</div>
+    </div>
+    <div>
+      <div class="stat-num">Top 500</div>
+      <div class="stat-label">NCL Nationally</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFESSIONAL EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Professional Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="section-hint reveal">// Click any card to expand full details</p>
+  <div class="exp-grid">
+
+    <div class="exp-card reveal" onclick="toggleExp(this)">
+      <div class="exp-top">
+        <div class="exp-header">
+          <div>
+            <p class="exp-company">Handshake AI &nbsp;·&nbsp; San Francisco, CA (Remote)</p>
+            <h3 class="exp-role">Cybersecurity AI Trainer</h3>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Mar 2026 — Present</span>
+            <span class="exp-toggle">+</span>
+          </div>
+        </div>
+        <p class="exp-summary">Training frontier AI models on cybersecurity domain knowledge — writing expert-level prompts, evaluating LLM outputs for security accuracy, and producing annotated data for leading AI labs.</p>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-detail-inner">
+          <ul>
+            <li>Develop cybersecurity domain-specific prompts for Large Language Models (LLMs), focusing on accuracy, threat modeling, and real-world security domain nuance</li>
+            <li>Evaluate and revise LLM responses to ensure correctness and alignment with established cybersecurity frameworks and best practices</li>
+            <li>Provide high-quality annotated training data supporting frontier AI labs in building more reliable and security-aware AI models</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card reveal" onclick="toggleExp(this)">
+      <div class="exp-top">
+        <div class="exp-header">
+          <div>
+            <p class="exp-company">Accenture &nbsp;·&nbsp; Supporting Roche (Fortune 500 Global Pharma) — SPEED Program</p>
+            <h3 class="exp-role">Cybersecurity &amp; Access Management Analyst</h3>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Sep 2022 — Aug 2024</span>
+            <span class="exp-toggle">+</span>
+          </div>
+        </div>
+        <div class="exp-award">🏆 SPEED Rockstar Award 2024 — Outstanding Performance &amp; Efficiency</div>
+        <p class="exp-summary">Delivered cybersecurity and access management operations for a Fortune 500 pharma client — enforcing least-privilege access, detecting security anomalies in logs, and embedding security into Agile SDLC pipelines.</p>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-detail-inner">
+          <ul>
+            <li>Administered Role-Based Access Control (RBAC) for enterprise tools supporting 650+ employees, enforcing least-privilege principles and reducing unauthorized access exposure across critical pharma systems</li>
+            <li>Monitored and analyzed batch job logs to detect data discrepancies and anomalous access patterns — identifying and mitigating security risks before escalation to incident level</li>
+            <li>Delivered weekly security briefings to Roche leadership on secure data handling practices, SDLC compliance posture, and evolving access risk — translating technical findings for executive stakeholders</li>
+            <li>Embedded security checkpoints into Agile development workflows alongside architects and business analysts, contributing to a Secure SDLC pipeline that reduced vulnerability introduction during sprint releases</li>
+            <li>Maintained data integrity controls and audit trail accuracy for critical workforce management systems used by 650+ employees, using GitLab, OutSystems, and VS Code</li>
+            <li>Acted as security liaison between technical engineering teams and client security leads, translating complex security requirements into actionable process improvements and policy updates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card reveal" onclick="toggleExp(this)">
+      <div class="exp-top">
+        <div class="exp-header">
+          <div>
+            <p class="exp-company">Internshala</p>
+            <h3 class="exp-role">Student Partner — Campus Brand Ambassador</h3>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Jun 2021 — Aug 2021</span>
+            <span class="exp-toggle">+</span>
+          </div>
+        </div>
+        <p class="exp-summary">Campus representative promoting professional development and internship opportunities to students.</p>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-detail-inner">
+          <ul>
+            <li>Promoted professional development and internship opportunities as an official campus representative, connecting students with career resources</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LEADERSHIP ROLES -->
+<section id="leadership-exp" style="background:var(--surface);">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Leadership Roles</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="section-hint reveal">// Click any card to expand full details</p>
+  <div class="exp-grid">
+
+    <div class="exp-card reveal" onclick="toggleExp(this)">
+      <div class="exp-top">
+        <div class="exp-header">
+          <div>
+            <p class="exp-company">Saint Louis University &nbsp;·&nbsp; WiCyS SLU Student Chapter</p>
+            <h3 class="exp-role">President</h3>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">May 2025 — Present &nbsp;·&nbsp; 11 mos</span>
+            <span class="exp-toggle">+</span>
+          </div>
+        </div>
+        <p class="exp-summary">Leading the WiCyS SLU chapter within the national WiCyS network — co-hosted a major cybersecurity event with CrowdStrike and a federal agency during Cybersecurity Awareness Month, featured on Fox 2 News.</p>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-detail-inner">
+          <ul>
+            <li>Lead the WiCyS SLU Student Chapter, representing Saint Louis University in the national WiCyS network and overseeing all chapter operations, event planning, and member engagement</li>
+            <li>Co-hosted a joint WiCyS event with Maryville University in partnership with CrowdStrike, the Global Cybersecurity Center (GCC), and a federal agency during Cybersecurity Awareness Month (Oct 2025), featuring a hands-on tabletop exercise led by industry professionals</li>
+            <li>Event brought together students, mentors, and cybersecurity leaders from across the region — reflections were featured in both SLU's and Maryville University's official coverage, and highlighted on Fox 2 News</li>
+            <li>Collaborate with faculty advisors, cybersecurity professionals, and student organizations to promote diversity and inclusion in cybersecurity</li>
+            <li>Organize technical workshops, speaker sessions, and networking events to support members' career development</li>
+            <li>Mentor and support chapter members in skill-building, certifications, and conference participation</li>
+            <li>Spearheaded partnerships with industry professionals including CrowdStrike and federal agency representatives to create direct mentorship opportunities for chapter members</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card reveal" onclick="toggleExp(this)">
+      <div class="exp-top">
+        <div class="exp-header">
+          <div>
+            <p class="exp-company">Cyber Billikens &nbsp;·&nbsp; Saint Louis University</p>
+            <h3 class="exp-role">Captain</h3>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Nov 2025 — Present &nbsp;·&nbsp; 5 mos</span>
+            <span class="exp-toggle">+</span>
+          </div>
+        </div>
+        <p class="exp-summary">Leading SLU's premier cybersecurity academic team in CTF competitions and the National Cyber League. Individually ranked Top 500 nationally (Fall 2025).</p>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-detail-inner">
+          <ul>
+            <li>Lead SLU's premier cybersecurity academic team in CTF (Capture the Flag) competitions, peer training sessions, and mentorship for members pursuing cybersecurity careers</li>
+            <li>Coordinated team participation in the National Cyber League (NCL)</li>
+            <li>Individually ranked Top 500 nationally in the NCL (Fall 2025)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card reveal" onclick="toggleExp(this)">
+      <div class="exp-top">
+        <div class="exp-header">
+          <div>
+            <p class="exp-company">Saint Louis University Student Government Association</p>
+            <h3 class="exp-role">Senator — School of Professional Studies</h3>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Sep 2025 — Present &nbsp;·&nbsp; 7 mos</span>
+            <span class="exp-toggle">+</span>
+          </div>
+        </div>
+        <p class="exp-summary">Official student representative for the School of Professional Studies in SLU's Student Government Association — collaborating with faculty and administration to shape student-focused policy.</p>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-detail-inner">
+          <ul>
+            <li>Serve as the official student representative for the School of Professional Studies in the University's Student Government Association</li>
+            <li>Collaborate with faculty, administration, and fellow senators to enhance student experiences and academic resources</li>
+            <li>Participate in SGA meetings, committees, and voting sessions to shape student-focused initiatives and university decisions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card reveal" onclick="toggleExp(this)">
+      <div class="exp-top">
+        <div class="exp-header">
+          <div>
+            <p class="exp-company">Saint Louis University</p>
+            <h3 class="exp-role">Student Member — ITS Committee</h3>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Sep 2025 — Present &nbsp;·&nbsp; 7 mos</span>
+            <span class="exp-toggle">+</span>
+          </div>
+        </div>
+        <p class="exp-summary">Representing student perspectives in university IT policy, cybersecurity strategy, and infrastructure decisions at the institutional level.</p>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-detail-inner">
+          <ul>
+            <li>Represent student perspectives in university IT policy and technology strategy discussions, contributing to institutional decisions</li>
+            <li>Contribute to institutional cybersecurity and infrastructure decisions at the university level</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-card reveal" onclick="toggleExp(this)">
+      <div class="exp-top">
+        <div class="exp-header">
+          <div>
+            <p class="exp-company">Saint Louis University Student Government Association</p>
+            <h3 class="exp-role">Treasurer &amp; Secretary — International Affairs Committee</h3>
+          </div>
+          <div class="exp-right">
+            <span class="exp-date">Mar 2026 — Present &nbsp;·&nbsp; 1 mo</span>
+            <span class="exp-toggle">+</span>
+          </div>
+        </div>
+        <p class="exp-summary">Managing committee finances and serving as secretary — preparing agendas, recording minutes, and coordinating support for international student programming.</p>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-detail-inner">
+          <ul>
+            <li>Manage the International Affairs Committee's finances while ensuring compliance with university policies</li>
+            <li>Serve as secretary by preparing agendas, recording minutes, and maintaining organized records for all committee meetings and events</li>
+            <li>Coordinate communication between the committee, the International Center, and student organizations to support programming for international students</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <div class="skill-group-icon">🛡️</div>
+      <div class="skill-group-name">Cybersecurity</div>
+      <div class="skill-tags">
+        <span class="skill-tag">RBAC</span><span class="skill-tag">Access Management</span><span class="skill-tag">Log Analysis</span><span class="skill-tag">Incident Identification</span><span class="skill-tag">Secure SDLC</span><span class="skill-tag">NICE Framework</span><span class="skill-tag">LLM Prompt Engineering</span><span class="skill-tag">CTF</span><span class="skill-tag">Threat Modeling</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-icon">💻</div>
+      <div class="skill-group-name">Technical</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">PL/SQL</span><span class="skill-tag">GitHub / GitLab</span><span class="skill-tag">VS Code</span><span class="skill-tag">OutSystems</span><span class="skill-tag">Jira</span><span class="skill-tag">ServiceNow</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-icon">📊</div>
+      <div class="skill-group-name">Analytics</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Tableau</span><span class="skill-tag">Excel</span><span class="skill-tag">pandas</span><span class="skill-tag">matplotlib</span><span class="skill-tag">seaborn</span><span class="skill-tag">Data Annotation</span><span class="skill-tag">Geospatial Analysis</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-icon">🤝</div>
+      <div class="skill-group-name">Professional</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Leadership</span><span class="skill-tag">Communication</span><span class="skill-tag">Agile</span><span class="skill-tag">Problem-Solving</span><span class="skill-tag">Stakeholder Management</span><span class="skill-tag">Event Planning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Technical Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-num">// 01</div>
+      <h3 class="project-title">Women Safety Handbag</h3>
+      <p class="project-desc">IoT device with an integrated alarm and shock mechanism designed to enhance personal safety. Combines hardware and software for real-world security applications.</p>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">// 02</div>
+      <h3 class="project-title">Gesture-Based Number Recognition</h3>
+      <p class="project-desc">Machine learning system for hand gesture identification, using computer vision to interpret human gestures as numerical inputs in real time.</p>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">// 03</div>
+      <h3 class="project-title">Smart Attendance System</h3>
+      <p class="project-desc">Facial recognition system for automated student attendance tracking, reducing manual overhead and improving the accuracy of institutional records.</p>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">// 04</div>
+      <h3 class="project-title">Driver State Analysis</h3>
+      <p class="project-desc">AI-based detection system for driver fatigue and distraction, applying computer vision to improve road safety outcomes and reduce accident risk.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Research</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="research-card reveal">
+    <p class="research-org">Saint Louis University &nbsp;·&nbsp; 2025 – 2026</p>
+    <h3 class="research-title">Cybersecurity Workforce Research</h3>
+    <p class="research-body">Analyzed over 65,000 job postings using the NICE Framework taxonomy to classify cybersecurity roles across Missouri and nationally. Conducted Python-based analysis (pandas, matplotlib, seaborn) of Handshake vs. CyberSeek datasets, uncovering an 87.5× disparity in cybersecurity opportunity visibility across platforms — with significant implications for how students discover and access cybersecurity careers.</p>
+    <div class="research-highlights">
+      <div>
+        <div class="highlight-val">65K+</div>
+        <div class="highlight-desc">Job postings analyzed</div>
+      </div>
+      <div>
+        <div class="highlight-val">87.5×</div>
+        <div class="highlight-desc">Disparity in MO opportunities</div>
+      </div>
+      <div>
+        <div class="highlight-val">NICE</div>
+        <div class="highlight-desc">Framework taxonomy applied</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" style="background:var(--surface);">
+  <div class="section-header reveal">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon">🔒</div>
+      <div><div class="cert-name">CompTIA Security+</div></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🔍</div>
+      <div>
+        <div class="cert-name">Google Cybersecurity Professional Certificate</div>
+        <div class="cert-year">Oct 2025</div>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">☁️</div>
+      <div><div class="cert-name">Oracle Certified Foundations Associate</div></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🛡️</div>
+      <div><div class="cert-name">Palo Alto Networks Cybersecurity Fundamentals</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-header reveal">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Awards &amp; Honors</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="awards-row">
+    <div class="award-card reveal">
+      <div class="award-icon">⭐</div>
+      <div class="award-title">Alpha Sigma Nu Honor Society</div>
+      <div class="award-org">Saint Louis University — School of Professional Studies · 2025</div>
+    </div>
+    <div class="award-card reveal">
+      <div class="award-icon">🏆</div>
+      <div class="award-title">SPEED Rockstar Award</div>
+      <div class="award-org">Accenture · 2024 — Outstanding Performance &amp; Efficiency</div>
+    </div>
+    <div class="award-card reveal">
+      <div class="award-icon">🎖️</div>
+      <div class="award-title">NCL Top 500 Nationally</div>
+      <div class="award-org">National Cyber League — Individual Competition · Fall 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEERING -->
+<section id="volunteering" style="background:var(--surface);">
+  <div class="section-header reveal">
+    <span class="section-num">08</span>
+    <h2 class="section-title">Volunteering &amp; Recognition</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="vol-grid">
+    <div class="vol-item reveal">
+      <div class="vol-dot" style="background:var(--accent2);"></div>
+      <div class="vol-text"><strong>Featured on Fox 2 News</strong> — representing Saint Louis University during Cybersecurity Awareness Month (Oct 2025)</div>
+    </div>
+    <div class="vol-item reveal">
+      <div class="vol-dot"></div>
+      <div class="vol-text"><strong>Volunteer</strong> — YourWords STL (Youth Engagement)</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading reveal">Let's <em>connect</em></h2>
+    <p class="contact-sub reveal">Open to cybersecurity roles, research collaborations, and AI/LLM projects.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:sluleenam@gmail.com" class="btn btn-primary">sluleenam@gmail.com</a>
+      <a href="https://www.linkedin.com/in/leena-sai-sree/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      <a href="tel:3146881085" class="btn btn-outline">(314) 688-1085</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Leena Sai Sree Maridi</span>
+  <span>Cybersecurity · AI · St. Louis, MO</span>
+</footer>
+
+<script>
+  function toggleExp(card) {
+    card.classList.toggle('open');
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
